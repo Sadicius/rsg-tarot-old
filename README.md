@@ -23,6 +23,9 @@ cards from each deck
 this is a reconverted work from FIVEM, the original script is the one from Pokemon cards but redesigned and adapted to REDM by me.
 https://github.com/DafkeDD/jim-pokemon
 
+# Dependancies
+- menuv
+- interact-sound
 
 I hope you like it
 Warning: I still have some problem, if you could help me to solve them I would appreciate it.
