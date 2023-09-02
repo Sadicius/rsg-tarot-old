@@ -1,6 +1,6 @@
 
 # For shared.lua #
-https://streamable.com/w2ac3s
+(https://streamable.com/w2ac3s)
 
 As I've been around here for a while, I share with you a work I did on tarot cards.
 
