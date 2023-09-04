@@ -1,8 +1,10 @@
+![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/cf660463-0b48-4dcd-9313-7302f93d9504)
 
 # For shared.lua #
 (https://streamable.com/w2ac3s)
 
 As I've been around here for a while, I share with you a work I did on tarot cards.
+![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/39891af9-6d78-468b-97a7-ee9e4237fc79)
 
 # Note
 has 175 cards, 8 possible decks
