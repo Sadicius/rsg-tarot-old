@@ -32,7 +32,7 @@ https://github.com/DafkeDD/jim-pokemon
 I hope you like it
 Warning: I still have some problem, if you could help me to solve them I would appreciate it.
 
-# note add items in someone shops
+# Note add items in someone shops
 card_pokebox -> box save solo cards
 card_boosterbox -> box for 4 packs
 card_boosterpack -> pack for 4 cards
