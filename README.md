@@ -49,3 +49,6 @@ add items
 add img in inventory
 see tarot/html/inventory
 add items in shared/items.lua
+
+# By
+https://github.com/Sadicius
