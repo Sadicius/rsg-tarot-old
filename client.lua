@@ -24,15 +24,15 @@ CreateThread(function()
 end)
 
 -- text for trigger
--- function DrawText3Ds(x, y, z, text)
---     local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
---     SetTextScale(0.35, 0.35)
---     SetTextFontForCurrentCommand(9)
---     SetTextColor(255, 255, 255, 215)
---     local str = CreateVarString(10, "LITERAL_STRING", text, Citizen.ResultAsLong())
---     SetTextCentre(1)
---     DisplayText(str,_x,_y)
--- end
+local function DrawText3Ds(x, y, z, text)
+    local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
+    SetTextScale(0.35, 0.35)
+    SetTextFontForCurrentCommand(9)
+    SetTextColor(255, 255, 255, 215)
+    local str = CreateVarString(10, "LITERAL_STRING", text, Citizen.ResultAsLong())
+    SetTextCentre(1)
+    DisplayText(str,_x,_y)
+end
 ------------------------------------------------------------------
 CreateThread(function()
     while true do
@@ -41,62 +41,67 @@ CreateThread(function()
         local playerCoords = GetEntityCoords(PlayerPedId())
         -- Verificar las ubicaciones de las tiendas de cartas de tarot de Config.CardshopLocation
         for _, v in pairs(Config.CardshopLocation) do
-            -- local loc = v.location
-            -- local distance = #(playerCoords - loc)
-            -- if distance < 2.5 then
-            --     sleep = false
-
-            --     DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Comprador de cartas [J]')
-
-            --     if IsControlJustPressed(1, RSGCore.Shared.Keybinds['J']) then
-            --         TriggerEvent('Cards2:client:openMenu')
-            --     end
-            -- end 
-
-            exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
-                name = v.name,
-                debugPoly = false,
-            }, {
-                options = {
-                    {
-                        type = "client",
-                        action = function()
-                            TriggerEvent('Cards2:client:openMenu')
-                        end,
-                        icon = "fas fa-comments-dollar",
-                        label = 'Comprador de cartas',
+            if not v.showTarget then
+                local loc = v.location
+                local distance = #(playerCoords - loc)
+                if distance < 2.5 then
+                    sleep = false
+    
+                    DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Comprador de cartas [J]')
+    
+                    if IsControlJustPressed(1, RSGCore.Shared.Keybinds['J']) then
+                        TriggerEvent('Cards2:client:openMenu')
+                    end
+                end 
+            else
+                exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
+                    name = v.name,
+                    debugPoly = false,
+                }, {
+                    options = {
+                        {
+                            type = "client",
+                            action = function()
+                                TriggerEvent('Cards2:client:openMenu')
+                            end,
+                            icon = "fas fa-comments-dollar",
+                            label = 'Comprador de cartas',
+                        },
                     },
-                },
-                distance = 3,
-            })
+                    distance = 3,
+                })
+            end
         end
         -- Verificar las ubicaciones de los NPCs de Config.Badge
         for k, v in pairs(Config.Badge) do
-            -- local loc = v.location
-            -- local distance = #(playerCoords - loc)
-            -- if distance < 2.5 then
-            --     sleep = false
-            --     DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Para cambiar por '..v.label.. ' [E]')
-            --     if IsControlJustPressed(1, RSGCore.Shared.Keybinds['E']) then
-            --         TriggerServerEvent('Cards2:server:badges', k)
-            --     end 
-            -- end
-             exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
-                name = v.name,
-                debugPoly = false,
-            }, {
-                options = {
-                    {
-                        type = "client",
-                        action = function()
-                            TriggerServerEvent('Cards2:server:badges', k)
-                        end,
-                        icon = "fas fa-box",
-                        label = 'Para cambiar por '..v.label,
+            if not v.showTarget then
+                local loc = v.location
+                local distance = #(playerCoords - loc)
+                if distance < 2.5 then
+                    sleep = false
+                    DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Para cambiar por '..v.label.. ' [E]')
+                    if IsControlJustPressed(1, RSGCore.Shared.Keybinds['E']) then
+                        TriggerServerEvent('Cards2:server:badges', k)
+                    end 
+                end
+            else
+                 exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
+                    name = v.name,
+                    debugPoly = false,
+                }, {
+                    options = {
+                        {
+                            type = "client",
+                            action = function()
+                                TriggerServerEvent('Cards2:server:badges', k)
+                            end,
+                            icon = "fas fa-box",
+                            label = 'Para cambiar por '..v.label,
+                        },
                     },
-                },
-                distance = 3,
-            })
+                    distance = 3,
+                })
+            end
         end
 
         if sleep then
