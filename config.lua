@@ -59,28 +59,28 @@ Config.CardshopLocation =  {
 		name = 'Cardshop1',
 		location = vector3(1309.64, -6858.61, 45.1), --vector3(175.08, -1320.79, 170.34),
 		label = 'Sell Cards Tarot',
-		--showblip = true,
+		showblip = true,
 		showTarget = true
 	},
 	['Cardshop3'] = {
 		name = 'Cardshop2',
 		location = vector3(2402.27, -1358.3, 45.59),
 		label = 'Sell Cards Tarot',
-		--showblip = true,
+		showblip = true,
 		showTarget = true
 	},
 	['Cardshop2'] = {
 		name = 'Cardshop3',
 		location = vector3(749.48, 1822.52, 239.18), 
 		label = 'Sell Cards Tarot',
-		--showblip = true,
+		showblip = true,
 		showTarget = true
 	}, 
 	['Cardshop'] = {
 		name = 'Cardshop4',
 		location = vector3(-1748.39, -1626.08, 89.86), --vector3(2402.27, -1358.3, 45.59),
 		label = 'Sell Cards Tarot',
-		--showblip = true,
+		showblip = true,
 		showTarget = true
 	},
 }
@@ -106,7 +106,7 @@ Config.Badge = {
 		["card_onix"] = 1, 
 		["card_geodude"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_cascadebadge"] = {
@@ -122,7 +122,7 @@ Config.Badge = {
 		["card_psyduck"] = 1, 
 		["card_togepi"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_thunderbadge"] = {
@@ -139,7 +139,7 @@ Config.Badge = {
 			["card_electrode"] = 1, 
 			["card_magneton"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_rainbowbadge"] = {
@@ -156,7 +156,7 @@ Config.Badge = {
 			["card_bellsprout"] = 1, 
 			["card_venusaur"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_soulbadge"] = {
@@ -173,7 +173,7 @@ Config.Badge = {
 			["card_venomoth"] = 1, 
 			["card_golbat"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_marshbadge"] = {
@@ -190,7 +190,7 @@ Config.Badge = {
 			["card_hypno"] = 1,
 			["card_jynx"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_volcanobadge"] = {
@@ -207,7 +207,7 @@ Config.Badge = {
 			["card_charizard"] =1,
 			["card_moltres"] = 1
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_earthbadge"] = {
@@ -224,7 +224,7 @@ Config.Badge = {
 			["card_dugtrio"] = 1,
 			["card_persian"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
     ["card_trophybadge"] = {
@@ -243,7 +243,7 @@ Config.Badge = {
 			["card_volcanohbadge"] = 1,
 			["card_earthbadge"] = 1,
 		},
-		--showblip = true,
+		showblip = true,
 		showTarget = true
     },
 }
