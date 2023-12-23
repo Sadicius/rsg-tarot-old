@@ -6,20 +6,21 @@ local tarottrader
 local name = nil
 
 CreateThread(function()
-    for _, v in pairs(Config.Badge) do           
-        local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
-        SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
-        SetBlipScale(blip, Config.Blip.blipScale)
-        Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
-
-    end
-
-    for _, v in pairs(Config.CardshopLocation) do
-        local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
-        SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
-        SetBlipScale(blip, Config.Blip.blipScale)
-        Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
-
+    if v.showBlip then
+        for _, v in pairs(Config.Badge) do           
+            local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
+            SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
+            SetBlipScale(blip, Config.Blip.blipScale)
+            Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
+    
+        end
+    
+        for _, v in pairs(Config.CardshopLocation) do
+            local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
+            SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
+            SetBlipScale(blip, Config.Blip.blipScale)
+            Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
+        end
     end
 end)
 
