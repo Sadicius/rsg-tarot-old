@@ -19,12 +19,9 @@
 - /giveitem id card_boosterbox 1 
 
 # Items
-
 - add img in inventory 
 - add items in shared/items.lua
 - add img in someone script book
-  
-![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/4eca3da6-44ec-4028-bfa3-dc58ea4830db)
 
 # Credits
 - Version oficial thanks
