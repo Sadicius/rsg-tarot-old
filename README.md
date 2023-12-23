@@ -1,11 +1,11 @@
-https://forum.cfx.re/uploads/default/optimized/4X/b/b/b/bbb0ccf27d97c80aa9a243d687373bb1087ef4a3_2_690x388.jpeg
+![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/d75df109-5c4a-49c4-ba41-dad9b8192aa3)
 
 # rsg-tarot
 
 - As I’ve been around here for a while, I share with you a work I did on tarot cards.
 - Has 175 cards, 8 possible decks has a box to store only the cards html animation and custom css work cards of each custom deck different types of rarity for the cards store to sell the cards for money to npc snake dancer different locations for exchanging some cards for the decks to npc snake dancer
   
-https://cdn.discordapp.com/attachments/1148027697952456724/1148349985805582467/Es_Tarot.gif
+![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/20c51e48-536b-429c-a2ef-05bc1712102b)
 
 # Dependancies
 - menuv
