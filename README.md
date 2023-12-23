@@ -4,8 +4,6 @@
 
 - As I’ve been around here for a while, I share with you a work I did on tarot cards.
 - Has 175 cards, 8 possible decks has a box to store only the cards html animation and custom css work cards of each custom deck different types of rarity for the cards store to sell the cards for money to npc snake dancer different locations for exchanging some cards for the decks to npc snake dancer
-  
-![image](https://github.com/Sadicius/rsg-tarot/assets/124639760/20c51e48-536b-429c-a2ef-05bc1712102b)
 
 # Dependancies
 - menuv
