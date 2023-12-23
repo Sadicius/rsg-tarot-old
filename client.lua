@@ -5,105 +5,107 @@ local tarotvendor
 local tarottrader
 local name = nil
 
-local function AddBlip()
-        for k, v in pairs(Config.Badge) do           
-            local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
-            SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
-            SetBlipScale(blip, Config.Blip.blipScale)
-            Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
+CreateThread(function()
+    for _, v in pairs(Config.Badge) do           
+        local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
+        SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
+        SetBlipScale(blip, Config.Blip.blipScale)
+        Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
 
-        end
-
-        for k, v in pairs(Config.CardshopLocation) do
-            local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
-            SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
-            SetBlipScale(blip, Config.Blip.blipScale)
-            Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
-
-        end
     end
 
-Citizen.CreateThread(function()
-       AddBlip()
+    for _, v in pairs(Config.CardshopLocation) do
+        local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, v.location)
+        SetBlipSprite(blip, GetHashKey(Config.Blip.blipSprite), true)
+        SetBlipScale(blip, Config.Blip.blipScale)
+        Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.Blip.blipName)
+
+    end
 end)
 
 -- text for trigger
-function DrawText3Ds(x, y, z, text)
-    local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
-    SetTextScale(0.35, 0.35)
-    SetTextFontForCurrentCommand(9)
-    SetTextColor(255, 255, 255, 215)
-    local str = CreateVarString(10, "LITERAL_STRING", text, Citizen.ResultAsLong())
-    SetTextCentre(1)
-    DisplayText(str,_x,_y)
-end
+-- function DrawText3Ds(x, y, z, text)
+--     local onScreen,_x,_y=GetScreenCoordFromWorldCoord(x, y, z)
+--     SetTextScale(0.35, 0.35)
+--     SetTextFontForCurrentCommand(9)
+--     SetTextColor(255, 255, 255, 215)
+--     local str = CreateVarString(10, "LITERAL_STRING", text, Citizen.ResultAsLong())
+--     SetTextCentre(1)
+--     DisplayText(str,_x,_y)
+-- end
 ------------------------------------------------------------------
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         Wait(1)
         local sleep = true
         local playerCoords = GetEntityCoords(PlayerPedId())
-               
         -- Verificar las ubicaciones de las tiendas de cartas de tarot de Config.CardshopLocation
-        for k, v in pairs(Config.CardshopLocation) do
-            local loc = v.location
-            local distance = #(playerCoords - loc)
-            if distance < 2.5 then
-                sleep = false
-                DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Comprador de cartas [J]')
-                if IsControlJustPressed(1, RSGCore.Shared.Keybinds['J']) then
-                    TriggerEvent('Cards2:client:openMenu')
-                end
-            end 
+        for _, v in pairs(Config.CardshopLocation) do
+            -- local loc = v.location
+            -- local distance = #(playerCoords - loc)
+            -- if distance < 2.5 then
+            --     sleep = false
+
+            --     DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Comprador de cartas [J]')
+
+            --     if IsControlJustPressed(1, RSGCore.Shared.Keybinds['J']) then
+            --         TriggerEvent('Cards2:client:openMenu')
+            --     end
+            -- end 
+
+            exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
+                name = v.name,
+                debugPoly = false,
+            }, {
+                options = {
+                    {
+                        type = "client",
+                        action = function()
+                            TriggerEvent('Cards2:client:openMenu')
+                        end,
+                        icon = "fas fa-comments-dollar",
+                        label = 'Comprador de cartas',
+                    },
+                },
+                distance = 3,
+            })
         end
-        
         -- Verificar las ubicaciones de los NPCs de Config.Badge
         for k, v in pairs(Config.Badge) do
-            local loc = v.location
-            local distance = #(playerCoords - loc)
-            if distance < 2.5 then
-                sleep = false
-                DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Para cambiar por '..v.label.. '[E]')
-                if IsControlJustPressed(1, RSGCore.Shared.Keybinds['E']) then
-                    TriggerServerEvent('Cards2:server:badges', k)
-                end 
-            end
+            -- local loc = v.location
+            -- local distance = #(playerCoords - loc)
+            -- if distance < 2.5 then
+            --     sleep = false
+            --     DrawText3Ds(loc.x, loc.y, loc.z + 1.0, 'Para cambiar por '..v.label.. ' [E]')
+            --     if IsControlJustPressed(1, RSGCore.Shared.Keybinds['E']) then
+            --         TriggerServerEvent('Cards2:server:badges', k)
+            --     end 
+            -- end
+             exports['rsg-target']:AddCircleZone(v.name, v.location, 2, {
+                name = v.name,
+                debugPoly = false,
+            }, {
+                options = {
+                    {
+                        type = "client",
+                        action = function()
+                            TriggerServerEvent('Cards2:server:badges', k)
+                        end,
+                        icon = "fas fa-box",
+                        label = 'Para cambiar por '..v.label,
+                    },
+                },
+                distance = 3,
+            })
         end
-        
+
         if sleep then
-            Wait(1000) -- Esperar 1 segundo si el jugador no está cerca de ninguna ubicación
+            Wait(1000)
         end
     end
 end)
-
 
 local spawnedPeds = {}
-
-Citizen.CreateThread(function()
-    while true do
-        Wait(500)
-        for k,v in pairs(Config.PedList) do
-            local playerCoords = GetEntityCoords(PlayerPedId())
-            local distance = #(playerCoords - v.coords2.xyz)
-
-            if distance < Config.DistanceSpawn and not spawnedPeds[k] then
-                local spawnedPed = NearPed(v.model, v.coords2)
-                spawnedPeds[k] = { spawnedPed = spawnedPed }
-            end
-            
-            if distance >= Config.DistanceSpawn and spawnedPeds[k] then
-                if Config.FadeIn then
-                    for i = 255, 0, -51 do
-                        Wait(50)
-                        SetEntityAlpha(spawnedPeds[k].spawnedPed, i, false)
-                    end
-                end
-                DeletePed(spawnedPeds[k].spawnedPed)
-                spawnedPeds[k] = nil
-            end
-        end
-    end
-end)
 
 function NearPed(model, coords2)
     RequestModel(model)
@@ -134,6 +136,32 @@ function NearPed(model, coords2)
     return spawnedPed
 end
 
+CreateThread(function()
+    while true do
+        Wait(500)
+        for k,v in pairs(Config.PedList) do
+            local playerCoords = GetEntityCoords(PlayerPedId())
+            local distance = #(playerCoords - v.coords2.xyz)
+
+            if distance < Config.DistanceSpawn and not spawnedPeds[k] then
+                local spawnedPed = NearPed(v.model, v.coords2)
+                spawnedPeds[k] = { spawnedPed = spawnedPed }
+            end
+
+            if distance >= Config.DistanceSpawn and spawnedPeds[k] then
+                if Config.FadeIn then
+                    for i = 255, 0, -51 do
+                        Wait(50)
+                        SetEntityAlpha(spawnedPeds[k].spawnedPed, i, false)
+                    end
+                end
+                DeletePed(spawnedPeds[k].spawnedPed)
+                spawnedPeds[k] = nil
+            end
+        end
+    end
+end)
+
 RegisterNetEvent("Cards2:Client:OpenCards")
 AddEventHandler("Cards2:Client:OpenCards", function() 
     RequestAnimDict("mech_melee@unarmed@ai@_ambient@_healthy@_streamed")
@@ -157,7 +185,7 @@ AddEventHandler("Cards2:Client:OpenCards", function()
         DeleteEntity(propbox)
         ClearPedTasks(PlayerPedId())
     end)
-end) 
+end)
 
 RegisterNetEvent("Cards2:Client:OpenPack")
 AddEventHandler("Cards2:Client:OpenPack", function() 
@@ -209,7 +237,7 @@ AddEventHandler("Cards2:Client:CardChoosed", function(card)
         open = true,
         class = 'choose',
         data = card,
-    }) 
+    })
 end)
 
 RegisterNetEvent("Cards2:client:UseBox")
@@ -243,8 +271,7 @@ AddEventHandler("Cards2:client:UseBox", function()
     end)
 end)
 
-
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do 
         Wait(2500)
         local PlayerData = RSGCore.Functions.GetPlayerData()
@@ -280,9 +307,7 @@ local menu = MenuV:CreateMenu(false, 'Player Items', 'topright', 155, 0, 0, 'siz
 local menu2 = menu:InheritMenu({title = false, subtitle = 'Card Shop', theme = 'default' })
 local menu_button = menu:AddButton({ icon = '🔖', label = 'Sell Cards/Badges', value = menu2, description = 'View List Of Items' })
 
-
 --------------------------------------------------------------------
-
 
 RegisterNetEvent('Cards2:client:openMenu')
 AddEventHandler('Cards2:client:openMenu', function()
@@ -299,7 +324,7 @@ menu_button:On('select', function(item)
             price = math.ceil(price * itemCount)
 
             local menu_button2 = menu2:AddButton({
-                label = itemName .. " | Amount : " ..itemCount.." | $" .. price,
+                label = itemName.label .. " | Amount : " ..itemCount.." | $" .. price,
                 name = itemName,
                 value = {name = itemName, count = itemCount, price = price},
 
@@ -307,12 +332,8 @@ menu_button:On('select', function(item)
                 local select = btn.Value -- get all the values from v!
                 TriggerServerEvent('Cards2:sellItem', select.name, select.count, select.price)
                 menu2:ClearItems(false)
-                exports['possible-skills']:XP(1, 'comercio', 1)
             end})
         end
     end)
-
-    exports['possible-skills']:XP(1, 'investigacion', 1)
-    exports['possible-skills']:XP(1, 'buscatesoros', 1)
 
 end)

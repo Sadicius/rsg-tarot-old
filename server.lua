@@ -36,9 +36,9 @@ RSGCore.Functions.CreateUseableItem("card_boosterbox", function(source, item)
         TriggerClientEvent("Cards2:Client:OpenCards", source, item.name)
 			local xPlayer = RSGCore.Functions.GetPlayer(source)
 				xPlayer.Functions.AddItem('card_boosterpack',4)
-           Citizen.Wait(4000)
+           Wait(4000)
         TriggerClientEvent('RSGCore:Notify', source, 'You got 4 booster packs!')
-            Citizen.Wait(1000)
+            Wait(1000)
     end
 end)
 
@@ -55,7 +55,7 @@ end)
 RSGCore.Functions.CreateUseableItem("card_boosterpack", function(source, item)
     local Player = RSGCore.Functions.GetPlayer(source)  
         TriggerClientEvent("Cards2:Client:OpenPack", source)  
-        Citizen.Wait(4000)
+        Wait(4000)
         TriggerClientEvent('RSGCore:Notify', source, 'You got 4 cards!')
 end)
 
@@ -103,7 +103,7 @@ AddEventHandler('Cards2:Server:rewarditem', function()
         card = basicCards[math.random(1, #basicCards)]
 	end
 
-    Citizen.Wait(10)
+    Wait(10)
     --print(card)
 
     if card ~= '' then        
@@ -148,7 +148,7 @@ AddEventHandler("Cards2:server:badges", function(type)
                     Player.Functions.RemoveItem(k, v)
 
                     end 
-                   Citizen.Wait(2000)
+                   Wait(2000)
                     Player.Functions.AddItem(type, 1)
                 end 
 end)
@@ -172,7 +172,7 @@ AddEventHandler("Cards2:sellItem", function(itemName, amount, price)
 	local xPlayer = RSGCore.Functions.GetPlayer(source)
     
     if xPlayer.Functions.RemoveItem(itemName, amount) then
-        xPlayer.Functions.AddMoney('cash', price, 'Card-sell')
+        xPlayer.Functions.AddItem('cash', price, 'Card-sell')
         TriggerClientEvent("RSGCore:Notify", source, "You sold " .. amount .. " " .. itemName .. " for $" .. price, "success", 5000)
     end
 end)
